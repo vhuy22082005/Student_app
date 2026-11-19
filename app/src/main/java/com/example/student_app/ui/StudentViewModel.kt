@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 class StudentViewModel : ViewModel() {
-    private val _studentList = MutableStateFlow<List<Student>>(StudentRepository.getStudents())
+    private val _studentList = MutableStateFlow<List<Student>>(StudentRepository.getStudents().toList())
     val studentList: StateFlow<List<Student>> = _studentList.asStateFlow()
 
     fun addStudent(name: String, code: String, major: String, gpa: Double) {
@@ -20,11 +20,11 @@ class StudentViewModel : ViewModel() {
             gpa = gpa
         )
         StudentRepository.addStudent(newStudent)
-        _studentList.value = StudentRepository.getStudents()
+        _studentList.value = StudentRepository.getStudents().toList()
     }
 
     fun deleteStudent(id: String) {
         StudentRepository.deleteStudent(id)
-        _studentList.value = StudentRepository.getStudents()
+        _studentList.value = StudentRepository.getStudents().toList()
     }
 }
