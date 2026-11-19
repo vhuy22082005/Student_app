@@ -13,13 +13,18 @@ class StudentViewModel : ViewModel() {
 
     fun addStudent(name: String, code: String, major: String, gpa: Double) {
         val newStudent = Student(
-            id = (_studentList.value.size + 1).toString(),
+            id = System.currentTimeMillis().toString(),
             name = name,
             studentCode = code,
             major = major,
             gpa = gpa
         )
         StudentRepository.addStudent(newStudent)
+        _studentList.value = StudentRepository.getStudents()
+    }
+
+    fun deleteStudent(id: String) {
+        StudentRepository.deleteStudent(id)
         _studentList.value = StudentRepository.getStudents()
     }
 }

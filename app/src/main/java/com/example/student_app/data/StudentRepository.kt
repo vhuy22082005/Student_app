@@ -14,4 +14,8 @@ object StudentRepository {
     fun addStudent(student: Student) {
         students.add(student)
     }
+
+    fun deleteStudent(id: String) {
+        students.removeAll { it.id == id }
+    }
 }

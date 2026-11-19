@@ -10,6 +10,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.student_app.databinding.ActivityMainBinding
 import com.example.student_app.databinding.DialogAddStudentBinding
+import com.example.student_app.model.Student
 import com.example.student_app.ui.StudentAdapter
 import com.example.student_app.ui.StudentViewModel
 import kotlinx.coroutines.launch
@@ -34,7 +35,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        studentAdapter = StudentAdapter(emptyList())
+        studentAdapter = StudentAdapter(emptyList()) { student ->
+            showDeleteConfirmationDialog(student)
+        }
         binding.recyclerViewStudents.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = studentAdapter
@@ -49,6 +52,17 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun showDeleteConfirmationDialog(student: Student) {
+        AlertDialog.Builder(this)
+            .setTitle("Xóa sinh viên")
+            .setMessage("Bạn có chắc chắn muốn xóa sinh viên ${student.name}?")
+            .setPositiveButton("Xóa") { _, _ ->
+                viewModel.deleteStudent(student.id)
+            }
+            .setNegativeButton("Hủy", null)
+            .show()
     }
 
     private fun showAddStudentDialog() {
