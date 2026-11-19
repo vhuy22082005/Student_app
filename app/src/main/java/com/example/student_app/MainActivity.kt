@@ -61,8 +61,9 @@ class MainActivity : AppCompatActivity() {
                 val name = dialogBinding.etName.text.toString()
                 val code = dialogBinding.etCode.text.toString()
                 val major = dialogBinding.etMajor.text.toString()
+                val gpa = dialogBinding.etGpa.text.toString().toDoubleOrNull() ?: 3.5
                 if (name.isNotBlank() && code.isNotBlank()) {
-                    viewModel.addStudent(name, code, major, 3.5)
+                    viewModel.addStudent(name, code, major, gpa)
                 }
             }
             .setNegativeButton("Hủy", null)

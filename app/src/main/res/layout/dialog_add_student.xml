@@ -28,4 +28,12 @@
         android:inputType="text"
         android:layout_marginTop="12dp" />
 
+    <EditText
+        android:id="@+id/etGpa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Điểm GPA (VD: 3.5)"
+        android:inputType="numberDecimal"
+        android:layout_marginTop="12dp" />
+
 </LinearLayout>
